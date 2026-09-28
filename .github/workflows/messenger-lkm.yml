@@ -1,0 +1,18 @@
+name: Build Messenger-compatible LKM
+
+on:
+  workflow_dispatch:
+    inputs:
+      kmi:
+        description: Android kernel KMI
+        required: true
+        default: android15-6.6
+        type: string
+
+jobs:
+  build-lkm:
+    uses: ./.github/workflows/ddk-lkm.yml
+    with:
+      kmi: ${{ inputs.kmi }}
+      expected_size2: "0x0551"
+      expected_hash2: a9e1fd8478f09ae52b9211dd0750559a8a46af7f56af83fd2fdd990d177e0551
